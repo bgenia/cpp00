@@ -1,37 +1,24 @@
 NAME := ex00
 
-$(info $(SHELL))
+SRC != find . -type f -name '*.cpp'
 
-SRC_DIR := .
-OBJ_DIR := build/obj
+CXX := c++
+CXXFLAGS := -Wall -Werror -Wextra -std=c++98 -MMD
 
-SRC := $(shell find . -type f -name '*.cpp')
-OBJ := $(SRC:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
-
-CXXFLAGS := -Wall -Werror -Wextra -std=c++98
-
-.PHONY: all
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(SRC)
 	$(LINK.cpp) $^ $(LDLIBS) -o $@
 
-$(OBJ_DIR)/%.o: %.cpp
-	$(COMPILE.cpp) $< -o $@
-
-%.o: | $(OBJ_DIR)
-
-$(OBJ_DIR):
-	mkdir -p $@
-
-.PHONY: clean
 clean:
-	$(RM) $(OBJ)
+	$(RM) $(NAME).d
 
-.PHONY: fclean
 fclean: clean
 	$(RM) $(NAME)
 
-.PHONY: re
 re: fclean
 	$(MAKE)
+
+.PHONY: all clean fclean re
+
+-include $(NAME).d
