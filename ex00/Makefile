@@ -8,7 +8,7 @@ CXXFLAGS := -Wall -Werror -Wextra -std=c++98 -MMD
 all: $(NAME)
 
 $(NAME): $(SRC)
-	$(LINK.cpp) $^ $(LDLIBS) -o $@
+	$(LINK.cpp) $(SRC) $(LDLIBS) -o $@
 
 clean:
 	$(RM) $(NAME).d
