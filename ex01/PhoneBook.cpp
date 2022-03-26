@@ -43,6 +43,8 @@ void PhoneBook::displayContacts()
         << std::setw(10) << std::right << "Last name" << "|"
         << std::setw(10) << std::right << "Nickname" << "|"
         << std::endl;
+        
+    std::cout << std::string(36, '-') << std::endl;
     
     for (size_t i = 0; i < contactCount; i++)
     {
